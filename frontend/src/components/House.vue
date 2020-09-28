@@ -1,16 +1,18 @@
 <template>
-  <div class="container">
-    <div class="house-card">
-      <h3 class="label"> Name </h3>
-      <div class="name">
-        <h1>{{ name }}</h1>
-      </div>
-      <h3 class="label"> Region </h3>
-      <div class="region">
-        <h2>{{ region || "No Data" }}</h2>
+  <transition name="flip">
+    <div class="container">
+      <div v-on:click="flip()" class="house-card">
+        <h3 class="label"> Name </h3>
+        <div class="name">
+          <h1>{{ name }}</h1>
+        </div>
+        <h3 class="label"> Region </h3>
+        <div class="region">
+          <h1>{{ region || "No Data" }}</h1>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -19,6 +21,16 @@ export default {
   props: {
     name: String,
     region: String,
+  },
+  data() {
+    return {
+      flipped: false,
+    };
+  },
+  methods: {
+    flip() {
+      this.flipped = !this.flipped;
+    },
   },
 };
 </script>
@@ -35,8 +47,8 @@ h1, h2 {
 
 .container {
   width: 30rem;
+  height: 13.625rem;
 }
-
 .house-card {
   display: flex;
   flex-direction: column;
@@ -44,7 +56,7 @@ h1, h2 {
   padding: 1rem;
   box-shadow: 0 0.1875rem 1.5rem rgba(0, 0, 0, 0.2);
   border-radius: 0.375rem;
-
+  overflow: hidden;
 }
 
 .name {
@@ -53,7 +65,7 @@ h1, h2 {
   line-height: 1;
   letter-spacing: 0.0625rem;
   margin: 0 0 0.75rem 0;
-  padding: 1rem 0 2rem 0;
+  padding: 2rem 0 2rem 0;
 }
 
 .label {
@@ -68,18 +80,17 @@ h1, h2 {
   padding: 0 0 0.25rem 0;
   border-bottom: 0.125rem solid #314659;
 }
-
 .name > h1 {
   font-weight: 700;
-  white-space: nowrap ;
-  word-break: normal;
-  overflow: hidden ;
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .name > h1:hover {
   transition: color 0.3s ease;
   color: #e04f62;
+  cursor: pointer;
 }
 
 .region {
@@ -87,4 +98,17 @@ h1, h2 {
   font-weight: 200;
 }
 
+.flip-enter-active {
+  transition: all 0.4s ease;
+}
+
+.flip-leave-active {
+  display: none;
+}
+
+.flip-enter, .flip-leave {
+  transform: rotateY(180deg);
+  opacity: 0;
+
+}
 </style>

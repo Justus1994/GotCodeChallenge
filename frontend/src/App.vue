@@ -1,12 +1,13 @@
 <template>
+  <div class="header">
+    <h1> GOT Code Challenge </h1>
+  </div>
   <div class="grid-container">
-
       <House v-for="house in houses"
         :name="house.name"
         :region="house.region"
         v-bind:key="house.url"
       ></House>
-
   </div>
   <div>
     <Pages
@@ -51,12 +52,24 @@ export default {
 
 @import url('https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&display=swap');
 
+@font-face {
+  font-family: "Game of Thrones";
+  src: local("Game of Thrones"),
+   url(./assets/fonts/Game_of_Thrones.ttf) format("truetype");
+}
+
+.header {
+  font-family: 'Game of Thrones', serif;
+  color: #eeeede;
+  margin: 0 0 5rem 0;
+  letter-spacing: 0.15rem;
+}
+
 body {
   display: flex;
   background: #314659;
-  min-height: 100vh;
   margin: 0;
-  line-height: 1.6;
+  padding: 0;
   align-items: center;
   justify-content: center;
   text-rendering: optimizeLegibility;
@@ -66,14 +79,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #314659;
 }
 
 .grid-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 250px;
   grid-gap: 1.5rem;
   align-items: center;
 }
