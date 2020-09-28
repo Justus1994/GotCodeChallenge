@@ -1,13 +1,15 @@
 <template>
   <div class="grid-container">
-      <House name="House Algood" region="The Westerlands"/>
-      <House name="House Allyrion of Godsgrace" region="Dorne"/>
-      <House name="House Amber" region="The North"/>
-      <House name="House Ambrose" region="The Reach"/>
+      <House v-for="house in houses"
+        :name="house.name"
+        :region="house.region"
+        v-bind:key="house.url"
+      ></House>
   </div>
 </template>
 
 <script>
+import gotFetcher from './data-fetcher';
 import House from './components/House.vue';
 
 export default {
@@ -15,6 +17,18 @@ export default {
   components: {
     House,
   },
+  data() {
+    return {
+      houses: [],
+    };
+  },
+  created() {
+    gotFetcher('houses', 1).then((data) => {
+      this.houses = data;
+      console.log(this.houses);
+    });
+  },
+
 };
 </script>
 
