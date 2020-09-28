@@ -9,13 +9,11 @@
         v-bind:key="house.url"
       ></House>
   </div>
-  <div>
-    <Pages
-      :page="page"
-      v-on:next="page += 1"
-      v-on:last="page -=1"
-    ></Pages>
-  </div>
+  <Pages
+    :page="page"
+    v-on:next="page += 1"
+    v-on:last="page -=1"
+  ></Pages>
 </template>
 
 <script>
