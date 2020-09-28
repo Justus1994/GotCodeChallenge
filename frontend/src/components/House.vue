@@ -7,7 +7,7 @@
       </div>
       <h3 class="label"> Region </h3>
       <div class="region">
-        <h1>{{ region }}</h1>
+        <h2>{{ region || "No Data" }}</h2>
       </div>
     </div>
   </div>
@@ -35,8 +35,8 @@ h1, h2 {
 
 .container {
   width: 30rem;
-  height: 13.625rem;
 }
+
 .house-card {
   display: flex;
   flex-direction: column;
@@ -44,7 +44,7 @@ h1, h2 {
   padding: 1rem;
   box-shadow: 0 0.1875rem 1.5rem rgba(0, 0, 0, 0.2);
   border-radius: 0.375rem;
-  overflow: hidden;
+
 }
 
 .name {
@@ -53,7 +53,7 @@ h1, h2 {
   line-height: 1;
   letter-spacing: 0.0625rem;
   margin: 0 0 0.75rem 0;
-  padding: 2rem 0 2rem 0;
+  padding: 1rem 0 2rem 0;
 }
 
 .label {
@@ -68,8 +68,13 @@ h1, h2 {
   padding: 0 0 0.25rem 0;
   border-bottom: 0.125rem solid #314659;
 }
+
 .name > h1 {
   font-weight: 700;
+  white-space: nowrap ;
+  word-break: normal;
+  overflow: hidden ;
+  text-overflow: ellipsis;
 }
 
 .name > h1:hover {
@@ -80,7 +85,6 @@ h1, h2 {
 .region {
   font-size: 0.8rem;
   font-weight: 200;
-  padding: .5rem 0 .5rem 0;
-
 }
+
 </style>

@@ -1,34 +1,49 @@
 <template>
   <div class="grid-container">
+
       <House v-for="house in houses"
         :name="house.name"
         :region="house.region"
         v-bind:key="house.url"
       ></House>
+
+  </div>
+  <div>
+    <Pages
+      :page="page"
+      v-on:next="page += 1"
+      v-on:last="page -=1"
+    ></Pages>
   </div>
 </template>
 
 <script>
 import gotFetcher from './data-fetcher';
 import House from './components/House.vue';
+import Pages from './components/Pages.vue';
 
 export default {
   name: 'App',
   components: {
     House,
+    Pages,
   },
   data() {
     return {
       houses: [],
+      page: 0,
     };
   },
   created() {
-    gotFetcher('houses', 1).then((data) => {
-      this.houses = data;
-      console.log(this.houses);
-    });
+    this.page = 1;
   },
-
+  watch: {
+    page(val) {
+      gotFetcher('houses', val).then((data) => {
+        this.houses = data;
+      });
+    },
+  },
 };
 </script>
 
@@ -59,7 +74,7 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-auto-rows: 250px;
-  grid-gap: 10px;
+  grid-gap: 1.5rem;
   align-items: center;
 }
 
