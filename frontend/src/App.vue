@@ -1,6 +1,10 @@
 <template>
-<!--  <img alt="Vue logo" src="./assets/logo.png">-->
-  <House name="House Bracken of Stone Hedge" region="The North"/>
+  <div class="grid-container">
+      <House name="House Algood" region="The Westerlands"/>
+      <House name="House Allyrion of Godsgrace" region="Dorne"/>
+      <House name="House Amber" region="The North"/>
+      <House name="House Ambrose" region="The Reach"/>
+  </div>
 </template>
 
 <script>
@@ -36,4 +40,13 @@ body {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 250px;
+  grid-gap: 10px;
+  align-items: center;
+}
+
 </style>
