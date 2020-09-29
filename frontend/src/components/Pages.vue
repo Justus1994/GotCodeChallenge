@@ -20,6 +20,7 @@ export default {
 </script>
 
 <style scoped>
+
 .page-container {
     top: 4rem;
     position: relative;
