@@ -3,16 +3,16 @@
     <h1> GOT Code Challenge </h1>
   </div>
   <div class="grid-container">
-  <div v-for="(house, index) in houses" v-bind:key="house.url">
-    <transition name="component-fade" mode="out-in">
-      <component
-        v-bind:is="house.view"
-        :house="house"
-        :id="index"
-        v-on:flip="onFlip"
-      ></component>
-    </transition>
-  </div>
+    <div v-for="(house, index) in houses" v-bind:key="house.url">
+      <transition name="component-fade" mode="out-in">
+        <component
+          v-bind:is="house.view"
+          :house="house"
+          :id="index"
+          v-on:flip="onFlip"
+        ></component>
+      </transition>
+    </div>
   </div>
   <Pages
     :page="page"
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import gotFetcher from './data-fetcher';
+import { gotHouseFetcher } from './data-fetcher';
 import House from './components/House.vue';
 import HouseDetail from './components/HouseDetail.vue';
 import Pages from './components/Pages.vue';
@@ -41,11 +41,17 @@ export default {
     };
   },
   created() {
+    // Set Page to 1 to trigger Watcher
     this.page = 1;
   },
   watch: {
     page(val) {
-      gotFetcher('houses', val).then((data) => {
+      if (val === 0) {
+        this.page = 1;
+        return;
+      }
+
+      gotHouseFetcher(val).then((data) => {
         this.houses = data.map((el) => ({
           ...el,
           view: 'basic',
@@ -56,7 +62,6 @@ export default {
   methods: {
     onFlip(id) {
       const viewType = (type) => (type === 'basic' ? 'detail' : 'basic');
-
       this.houses[id].view = viewType(this.houses[id].view);
     },
   },
@@ -89,6 +94,7 @@ body {
   justify-content: center;
   text-rendering: optimizeLegibility;
 }
+
 #app {
   font-family: 'David Libre', serif;
   -webkit-font-smoothing: antialiased;
@@ -105,8 +111,9 @@ body {
 }
 
 .component-fade-enter-active, .component-fade-leave-active {
-  transition: opacity .5s ease;
+  transition: opacity .25s ease;
 }
+
 .component-fade-enter, .component-fade-leave-to {
   opacity: 0;
 }
