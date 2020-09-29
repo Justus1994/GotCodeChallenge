@@ -1,14 +1,14 @@
 <template>
   <transition name="flip">
     <div class="container">
-      <div v-on:click="flip()" class="house-card">
+      <div v-on:click="$emit('flip', id)" class="house-card">
         <h3 class="label"> Name </h3>
         <div class="name">
-          <h1>{{ name }}</h1>
+          <h1>{{ house.name }}</h1>
         </div>
         <h3 class="label"> Region </h3>
         <div class="region">
-          <h1>{{ region || "No Data" }}</h1>
+          <h1>{{ house.region || "No Data" }}</h1>
         </div>
       </div>
     </div>
@@ -19,18 +19,8 @@
 export default {
   name: 'House',
   props: {
-    name: String,
-    region: String,
-  },
-  data() {
-    return {
-      flipped: false,
-    };
-  },
-  methods: {
-    flip() {
-      this.flipped = !this.flipped;
-    },
+    house: Object,
+    id: Number,
   },
 };
 </script>
@@ -98,17 +88,4 @@ h1, h2 {
   font-weight: 200;
 }
 
-.flip-enter-active {
-  transition: all 0.4s ease;
-}
-
-.flip-leave-active {
-  display: none;
-}
-
-.flip-enter, .flip-leave {
-  transform: rotateY(180deg);
-  opacity: 0;
-
-}
 </style>

@@ -3,11 +3,16 @@
     <h1> GOT Code Challenge </h1>
   </div>
   <div class="grid-container">
-      <House v-for="house in houses"
-        :name="house.name"
-        :region="house.region"
-        v-bind:key="house.url"
-      ></House>
+  <div v-for="(house, index) in houses" v-bind:key="house.url">
+    <transition name="component-fade" mode="out-in">
+      <component
+        v-bind:is="house.view"
+        :house="house"
+        :id="index"
+        v-on:flip="onFlip"
+      ></component>
+    </transition>
+  </div>
   </div>
   <Pages
     :page="page"
@@ -19,12 +24,14 @@
 <script>
 import gotFetcher from './data-fetcher';
 import House from './components/House.vue';
+import HouseDetail from './components/HouseDetail.vue';
 import Pages from './components/Pages.vue';
 
 export default {
   name: 'App',
   components: {
-    House,
+    basic: House,
+    detail: HouseDetail,
     Pages,
   },
   data() {
@@ -39,8 +46,18 @@ export default {
   watch: {
     page(val) {
       gotFetcher('houses', val).then((data) => {
-        this.houses = data;
+        this.houses = data.map((el) => ({
+          ...el,
+          view: 'basic',
+        }));
       });
+    },
+  },
+  methods: {
+    onFlip(id) {
+      const viewType = (type) => (type === 'basic' ? 'detail' : 'basic');
+
+      this.houses[id].view = viewType(this.houses[id].view);
     },
   },
 };
@@ -85,6 +102,13 @@ body {
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 1.5rem;
   align-items: center;
+}
+
+.component-fade-enter-active, .component-fade-leave-active {
+  transition: opacity .5s ease;
+}
+.component-fade-enter, .component-fade-leave-to {
+  opacity: 0;
 }
 
 </style>
