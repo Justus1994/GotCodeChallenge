@@ -2,10 +2,10 @@
   <div class="page-container">
     <div class="pager">
       <button v-on:click="$emit('last')">Prev</button>
+      <div class="page-number">
+        {{ page }}
+      </div>
       <button v-on:click="$emit('next')">Next</button>
-    </div>
-    <div class="page-number">
-      {{ page }}
     </div>
   </div>
 </template>
@@ -20,18 +20,20 @@ export default {
 </script>
 
 <style scoped>
+
 .page-container {
-    top: 5rem;
+    top: 4rem;
     position: relative;
 }
 .pager {
   display: flex;
+  align-items: center;
   justify-content: space-around;
 }
 
 .page-number {
     color: #eeeede;
-    font-size: 5rem;
+    font-size: 2.5rem;
     font-weight: bold;
 }
 

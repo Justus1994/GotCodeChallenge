@@ -1,14 +1,14 @@
 const API_URL = 'https://anapioficeandfire.com/api';
 const pageSize = 4;
 
-async function gotFetch(endpoint, page) {
+export async function gotHouseFetcher(page) {
   const config = {
     method: 'GET',
     mode: 'cors',
   };
 
   const response = await window
-    .fetch(`${API_URL}/${endpoint}?page=${page}&pageSize=${pageSize}`, config);
+    .fetch(`${API_URL}/houses?page=${page}&pageSize=${pageSize}`, config);
 
   const data = await response.json();
 
@@ -18,4 +18,19 @@ async function gotFetch(endpoint, page) {
   return Promise.reject(data);
 }
 
-export default gotFetch;
+export async function gotFetch(url) {
+  const config = {
+    method: 'GET',
+    mode: 'cors',
+  };
+
+  const response = await window
+    .fetch(url, config);
+
+  const data = await response.json();
+
+  if (response.ok) {
+    return data;
+  }
+  return Promise.reject(data);
+}
