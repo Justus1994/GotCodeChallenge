@@ -37,8 +37,8 @@ h1, h2 {
 
 .container {
   width: 30rem;
-  height: 13.625rem;
 }
+
 .house-card {
   display: flex;
   flex-direction: column;
@@ -47,6 +47,8 @@ h1, h2 {
   box-shadow: 0 0.1875rem 1.5rem rgba(0, 0, 0, 0.2);
   border-radius: 0.375rem;
   overflow: hidden;
+  height: 12rem;
+  border: solid 0.25rem #eeeede;
 }
 
 .name {
@@ -70,6 +72,7 @@ h1, h2 {
   padding: 0 0 0.25rem 0;
   border-bottom: 0.125rem solid #314659;
 }
+
 .name > h1 {
   font-weight: 700;
   white-space: nowrap;
@@ -77,10 +80,15 @@ h1, h2 {
   text-overflow: ellipsis;
 }
 
-.name > h1:hover {
-  transition: color 0.3s ease;
+.house-card:hover {
+  transition: all 0.3s ease;
   color: #e04f62;
   cursor: pointer;
+  border-color: #d7d0c0;
+}
+.house-card:hover .label {
+  transition: border-color 0.3s ease;
+  border-color: #e04f62;
 }
 
 .region {
