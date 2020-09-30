@@ -97,8 +97,8 @@ p {
   border-radius: 50%;
   width: 1rem;
   height: 1rem;
-  -webkit-animation: spin-5ef7fdde 2s linear infinite;
-  animation: spin-5ef7fdde 2s linear infinite;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
 }
 
 @keyframes spin {

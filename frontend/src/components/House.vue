@@ -1,18 +1,16 @@
 <template>
-  <transition name="flip">
-    <div class="container">
-      <div v-on:click="$emit('flip', id)" class="house-card">
-        <h3 class="label"> Name </h3>
-        <div class="name">
-          <h1>{{ house.name }}</h1>
-        </div>
-        <h3 class="label"> Region </h3>
-        <div class="region">
-          <h1>{{ house.region || "No Data" }}</h1>
-        </div>
+  <div class="container">
+    <div v-on:click="$emit('flip', id)" class="house-card">
+      <h3 class="label"> Name </h3>
+      <div class="name">
+        <h1>{{ house.name }}</h1>
+      </div>
+      <h3 class="label"> Region </h3>
+      <div class="region">
+        <h1>{{ house.region || "No Data" }}</h1>
       </div>
     </div>
-  </transition>
+  </div>
 </template>
 
 <script>
@@ -25,7 +23,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 h1, h2 {
