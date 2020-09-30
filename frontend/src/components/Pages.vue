@@ -32,9 +32,9 @@ export default {
 }
 
 .page-number {
-    color: #eeeede;
-    font-size: 2.5rem;
-    font-weight: bold;
+  color: #eeeede;
+  font-size: 2.5rem;
+  font-weight: bold;
 }
 
 button {
